@@ -1,0 +1,39 @@
+{% extends "base.html" %} {% block content %} {% load static %}
+<section class="content">
+    <section class="post_forum">Post Forum</section>
+<form action="/" method="POST">
+    {% csrf_token %}
+    <input type="text" name="name" placeholder="Enter your name" required/><br>
+    <textarea name="body" placeholder="tell us more" required></textarea><br>
+    <input type="submit" value="Post" />
+</form>
+
+<section class="posts">
+    <ul>
+    {% for post in posts %}
+    <li>
+        <img class="menu_icon js-menu-icon" src="{% static 'img/menu.png' %}" alt="">
+        <div class="menu">
+        <a href="/delete/{{ post.id }}/">delete</a>
+    </div>
+    <div class="logo">
+        <img src="{% static 'img/profile-user (1).png' %}" alt="">
+
+    </div>
+    <div class="name_body">
+        <div class="name">{{ post.name }}</div>
+        <div class="datetime">{{ post.created_at }}</div>
+        <p>{{ post.body }}</p>
+
+    </div>
+    </li>
+    {% endfor %}
+    </ul>
+    
+</section>
+<script src="https://code.jquery.com/jquery-3.6.1.js"
+  integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+  crossorigin="anonymous"></script>
+  <script src="/static/js/post.js"></script>
+</section>
+{% endblock %}
